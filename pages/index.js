@@ -8,7 +8,6 @@ class HomePage extends Component {
 		const featuredEvents = getFeaturedEvents();
 		return (
 			<div>
-				<h1>Home Page</h1>
 				<EventsList items={featuredEvents} />
 			</div>
 		);
