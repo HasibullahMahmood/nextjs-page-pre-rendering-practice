@@ -1,7 +1,10 @@
 import { Component } from 'react';
-import Link from 'next/link';
 
 import styles from './event-item.module.css';
+import LinkButton from '../link-button/link-button';
+import AddressIcon from '../icons/address-icon';
+import ArrowRightIcon from '../icons/arrow-right-icon';
+import DateIcon from '../icons/date-icon';
 
 class EventItem extends Component {
 	render() {
@@ -20,14 +23,21 @@ class EventItem extends Component {
 					<div>
 						<h2>{title}</h2>
 						<div className={styles.date}>
+							<DateIcon />
 							<time>{humanReadableDate}</time>
 						</div>
 						<div className={styles.address}>
+							<AddressIcon />
 							<address>{address}</address>
 						</div>
 					</div>
 					<div className={styles.actions}>
-						<Link href={`/events/${id}`}>Explore Link</Link>
+						<LinkButton link={`/events/${id}`}>
+							Explore Event
+							<span className={styles.icon}>
+								<ArrowRightIcon />
+							</span>
+						</LinkButton>
 					</div>
 				</div>
 			</li>
