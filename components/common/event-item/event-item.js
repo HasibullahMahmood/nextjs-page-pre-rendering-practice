@@ -1,7 +1,7 @@
 import { Component } from 'react';
 
 import styles from './event-item.module.css';
-import LinkButton from '../link-button/link-button';
+import Button from '../button/button';
 import AddressIcon from '../icons/address-icon';
 import ArrowRightIcon from '../icons/arrow-right-icon';
 import DateIcon from '../icons/date-icon';
@@ -32,12 +32,12 @@ class EventItem extends Component {
 						</div>
 					</div>
 					<div className={styles.actions}>
-						<LinkButton link={`/events/${id}`}>
+						<Button link={`/events/${id}`}>
 							Explore Event
 							<span className={styles.icon}>
 								<ArrowRightIcon />
 							</span>
-						</LinkButton>
+						</Button>
 					</div>
 				</div>
 			</li>

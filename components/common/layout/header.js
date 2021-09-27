@@ -13,7 +13,7 @@ class Header extends Component {
 				<nav className={styles.navigation}>
 					<ul>
 						<li>
-							<Link href="/all-events">All Events</Link>
+							<Link href="/events">Browse All Events</Link>
 						</li>
 					</ul>
 				</nav>

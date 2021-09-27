@@ -2,9 +2,9 @@ import { Component } from 'react';
 import { withRouter } from 'next/router';
 
 import { getEventById } from '../../dummyData';
-import EventSummary from '../../components/pages/event-detail/event-summary';
-import EventLogistics from '../../components/pages/event-detail/event-logistics';
-import EventContent from '../../components/pages/event-detail/event-content';
+import EventSummary from '../../components/pages-components/event-detail/event-summary';
+import EventLogistics from '../../components/pages-components/event-detail/event-logistics';
+import EventContent from '../../components/pages-components/event-detail/event-content';
 
 class EventDetailPage extends Component {
 	render() {
