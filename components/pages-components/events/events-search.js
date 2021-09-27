@@ -1,23 +1,37 @@
-import { Component } from 'react';
+import { Component, createRef } from 'react';
 
 import Button from '../../common/button/button';
 import styles from './events-search.module.css';
 
 class EventsSearch extends Component {
+	constructor(props) {
+		super(props);
+		this.yearInputRef = createRef();
+		this.monthInputRef = createRef();
+	}
+
+	submitHandler = (event) => {
+		event.preventDefault();
+
+		const year = this.yearInputRef.current.value;
+		const month = this.monthInputRef.current.value;
+		this.props.onSearch(year, month);
+	};
+
 	render() {
 		return (
-			<form className={styles.form}>
+			<form className={styles.form} onSubmit={this.submitHandler}>
 				<div className={styles.controls}>
 					<div className={styles.control}>
 						<label htmlFor="year">Year</label>
-						<select id="year">
+						<select id="year" ref={this.yearInputRef}>
 							<option value="2021">2021</option>
 							<option value="2022">2022</option>
 						</select>
 					</div>
 					<div className={styles.control}>
 						<label htmlFor="month">Month</label>
-						<select id="month">
+						<select id="month" ref={this.monthInputRef}>
 							<option value="1">January</option>
 							<option value="2">February</option>
 							<option value="3">March</option>

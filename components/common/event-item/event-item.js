@@ -18,7 +18,7 @@ class EventItem extends Component {
 		const address = location.replace(', ', '\n');
 		return (
 			<li className={styles.item}>
-				<img src={image} alt="" />
+				<img src={`/${image}`} alt="" />
 				<div className={styles.content}>
 					<div>
 						<h2>{title}</h2>
