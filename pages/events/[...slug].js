@@ -5,27 +5,11 @@ import ResultsTitle from '../../components/common/result-title/results-title';
 import EventsList from '../../components/common/events-list/events-list';
 import ErrorAlert from '../../components/common/error-alert/error-alert';
 import Button from '../../components/common/button/button';
-import { getFilteredEvents } from '../../dummyData';
+import { fetchFilteredEvents } from '../../helpers/api-util';
 
 class FilteredEventsPage extends Component {
 	render() {
-		const slug = this.props.router.query.slug;
-		if (!slug || slug.length < 2) {
-			return (
-				<>
-					<ErrorAlert>
-						<p>Loading...</p>
-					</ErrorAlert>
-					<div className="center" style={{ width: '170px' }}>
-						<Button link="/events">Show All Events</Button>
-					</div>
-				</>
-			);
-		}
-
-		const year = +slug[0];
-		const month = +slug[1];
-		if (isNaN(year) || isNaN(month) || year > 2030 || year < 2021 || month < 1 || month > 12) {
+		if (this.props.hasError) {
 			return (
 				<>
 					<ErrorAlert>
@@ -38,7 +22,7 @@ class FilteredEventsPage extends Component {
 			);
 		}
 
-		const filteredEvents = getFilteredEvents({ year, month });
+		const filteredEvents = this.props.events;
 		if (filteredEvents.length === 0) {
 			return (
 				<>
@@ -58,6 +42,24 @@ class FilteredEventsPage extends Component {
 			</>
 		);
 	}
+}
+
+export async function getServerSideProps(context) {
+	const { slug } = context.params;
+	if (!slug || slug.length < 2) {
+		return { props: { hasError: true } };
+	}
+
+	const year = +slug[0];
+	const month = +slug[1];
+
+	if (isNaN(year) || isNaN(month) || year > 2030 || year < 2021 || month < 1 || month > 12) {
+		return { props: { hasError: true } };
+	}
+	const events = await fetchFilteredEvents({ year, month });
+	return {
+		props: { events },
+	};
 }
 
 export default withRouter(FilteredEventsPage);

@@ -3,7 +3,7 @@ import { withRouter } from 'next/router';
 
 import EventsSearch from '../../components/pages-components/events/events-search';
 import EventsList from '../../components/common/events-list/events-list';
-import { getAllEvents } from '../../dummyData';
+import { fetchAllEvents, getAllEvents } from '../../helpers/api-util';
 
 class EventsPage extends Component {
 	searchHandler = (year, month) => {
@@ -12,7 +12,7 @@ class EventsPage extends Component {
 	};
 
 	render() {
-		const events = getAllEvents();
+		const { events } = this.props;
 
 		return (
 			<div>
@@ -21,6 +21,16 @@ class EventsPage extends Component {
 			</div>
 		);
 	}
+}
+
+export async function getStaticProps() {
+	const events = await fetchAllEvents();
+	return {
+		props: {
+			events,
+		},
+		revalidate: 30,
+	};
 }
 
 export default withRouter(EventsPage);
